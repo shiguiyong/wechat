@@ -171,6 +171,6 @@ $("#get_acc").click(function(){
 });
 
 $("#loginbtn").click(function(){
-	window.location.href = 'http://localhost:8888';
+	window.location.href = 'http://localhost:82';
 });
 
