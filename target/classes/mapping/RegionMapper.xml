@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.RegionMapper">
+
+    <resultMap type="com.model.CountryRegion" id="countryRegionResultMap">
+        <id column="REGION_CODE" property="regionCode"/>
+        <result column="REGION_NAME" property="regionName"/>
+        <result column="PARENT_CODE" property="parentCode"/>
+        <result column="REGION_TYPE" property="regionType"/>
+    </resultMap>
+
+    <resultMap type="com.model.ProvinceRegion" id="provinceRegionResultMap">
+        <id column="REGION_CODE" property="regionCode"/>
+        <result column="REGION_NAME" property="regionName"/>
+        <result column="PARENT_CODE" property="parentCode"/>
+        <result column="REGION_TYPE" property="regionType"/>
+    </resultMap>
+
+    <resultMap type="com.model.CityRegion" id="cityRegionResultMap">
+        <id column="REGION_CODE" property="regionCode"/>
+        <result column="REGION_NAME" property="regionName"/>
+        <result column="PARENT_CODE" property="parentCode"/>
+        <result column="REGION_TYPE" property="regionType"/>
+    </resultMap>
+
+    <resultMap type="com.model.AreaRegion" id="areaRegionResultMap">
+        <id column="REGION_CODE" property="regionCode"/>
+        <result column="REGION_NAME" property="regionName"/>
+        <result column="PARENT_CODE" property="parentCode"/>
+        <result column="REGION_TYPE" property="regionType"/>
+    </resultMap>
+    
+    
+    <select id="qryCountryRegion" parameterType="java.util.Map" resultMap="countryRegionResultMap">
+		SELECT REGION_CODE, REGION_NAME, PARENT_CODE, REGION_TYPE FROM REGION WHERE REGION_TYPE=1
+	</select>
+
+    <select id="qryProvinceRegion" parameterType="java.util.Map" resultMap="provinceRegionResultMap">
+		SELECT REGION_CODE, REGION_NAME, PARENT_CODE, REGION_TYPE FROM REGION WHERE REGION_TYPE=2
+	</select>
+
+    <select id="qryCityRegion" parameterType="java.util.Map" resultMap="cityRegionResultMap">
+		SELECT REGION_CODE, REGION_NAME, PARENT_CODE, REGION_TYPE FROM REGION WHERE REGION_TYPE=3
+	</select>
+
+    <select id="qryAreaRegion" parameterType="java.util.Map" resultMap="areaRegionResultMap">
+		SELECT REGION_CODE, REGION_NAME, PARENT_CODE, REGION_TYPE FROM REGION WHERE REGION_TYPE=4
+	</select>
+    
+</mapper>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content="IM即时通讯"/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="yunbamboo, 1115370641@qq.com"/>
+    <meta name="keywords" content="IMChat,即时通讯,IMChat即时通讯">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Mon, Nov 25 2019 00:00:00 GMT">
+    <meta http-equiv="expires" content="-1">
+    <title>IMChat 控制台</title>
+    <link rel="stylesheet" type="text/css" href="css/console.css" />
+    <script type="text/javascript" src="js/jquery-1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2/jquery.nicescroll.js"></script>
+
+    <link rel="icon" href="image/logo.png" type="image/x-icon" id="page_favionc">
+</head>
+<body>
+    <div id="login" class="login">
+        <div class="logo">
+            <img src="image/logo.png" style="height: 60px;width: 60px;">
+        </div>
+        <div class="login-box">
+            <div id="pwdLoginTab" >
+                <h2 class="loginbox-title">控制台登录</h2>
+
+                <div style="position: relative;text-align: center;">
+                    <div style="padding: 0;height: 32px;margin: 0;"></div>
+                    <div style="padding: 0 30px;width: 340px;">
+                        <!-- 用户名 -->
+                        <div class="inputbox">
+                            <div style="float: left;width: 21px;text-align: center;padding: 0 5px 0 10px;height: 100%;">
+                                <div class="user-img1" style="display: inline-block;width: 22px;height: 24px;margin-top: 12px;"></div>
+                            </div>
+                            <div style="height: 100%;position: relative;float: left;height: 100%;">
+                                <input id="userId" type="text" autocomplete="off" style="height: 46px;line-height: 46px;padding-left: 8px;color: #333;border: 0;font-size: 16px;font-weight: bold;width: 293px;background-color: #fff" placeholder="请输入账号"/>
+                            </div>
+                        </div>
+                        <div style="padding: 0;height: 32px;margin: 0;"></div>
+                        <!-- 密码 -->
+                        <div class="inputbox">
+                            <div style="float: left;width: 21px;text-align: center;padding: 0 5px 0 10px;height: 100%;">
+                                <div class="user-img2" style="display: inline-block;width: 22px;height: 24px;margin-top: 12px;"></div>
+                            </div>
+                            <div style="height: 100%;position: relative;float: left;height: 100%;">
+                                <input id="userPwd" type="password" autocomplete="new-password" style="height: 46px;line-height: 46px;padding-left: 8px;color: #333;border: 0;font-size: 16px;font-weight: bold;width: 293px;background-color: #fff" placeholder="请输入密码"/>
+                            </div>
+                        </div>
+                        <div style="padding: 0;height: 12px;margin: 0;"></div>
+                        <div style="padding: 0;height: 32px;margin: 0;">
+                            <span style="float: right;color: #1760D7;font-size: 14px;height: 12px;cursor: pointer;line-height: 16px;display: none;">忘记密码?</span>
+                        </div>
+                        <div style="padding: 0;height: 12px;margin: 0;"></div>
+                        <div style="padding: 0;height: 32px;margin: 0;">
+                            <button id="loginButton" style="width: 100%;padding: 15px;">登&nbsp;&nbsp;录</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div id="main" style="width: 100%;height: 100%;overflow: auto;display: none;">
+        <div id="header" class="header">
+            <img src="image/logo.png" class="logo-img">
+            <a class="logo-title">IMChat 即时通讯控制台</a>
+            <div id="userInfo" class="userInfo">
+            </div>
+        </div>
+        <div class="main">
+            <!--功能列表-->
+            <div id="menu" class="menu">
+            </div>
+            <!--显示功能-->
+            <div class="tabs">
+                <!--tab 标题-->
+                <div class="tab-title">
+                    <span id="tabTitle">首页</span>
+                </div>
+                <!--tab 内容-->
+                <div id="cards" class="tab-card"></div>
+            </div>
+        </div>
+    </div>
+    <div id="maskLayer" class="maskLayer" style="display: none;"></div>
+    <div id="alertPanel" class="alertPanel" style="display: none"></div>
+    <script type="text/javascript" src="js/IMChatConsole.js"></script>
+    <script type="text/javascript">
+        IMChatConsole.load();
+    </script>
+</body>
+</html>

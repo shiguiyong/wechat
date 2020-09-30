@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ChatRoomMapper">
+ 
+	<resultMap type="com.model.ChatRoom" id="resultMap">
+		<result column="ROOM_NAME" property="roomName"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="CHAT_TYPE" property="chatType"/>
+		<result column="CHAT_ID" property="chatId"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="STICK_SIGN" property="stickSign"/>
+		<result column="SORT_INDEX" property="sortIndex"/>
+		<result column="LAST_CHAT_DATE" property="lastChatDate"/>
+	</resultMap>
+	
+	<parameterMap type="com.model.ChatRoom" id="parameterMap">
+		<parameter property="roomName" resultMap="resultMap" />
+		<parameter property="userId" resultMap="resultMap" />
+		<parameter property="chatType" resultMap="resultMap" />
+		<parameter property="chatId" resultMap="resultMap" />
+		<parameter property="createDate" resultMap="resultMap" />
+		<parameter property="stickSign" resultMap="resultMap" />
+		<parameter property="sortIndex" resultMap="resultMap" />
+		<parameter property="lastChatDate" resultMap="resultMap" />
+	</parameterMap>
+	<insert id="insert" parameterMap="parameterMap">
+		INSERT INTO CHAT_ROOM
+			(USER_ID, CHAT_TYPE, CHAT_ID, CREATE_DATE, STICK_SIGN, SORT_INDEX, LAST_CHAT_DATE) 
+		VALUES 
+			(#{userId}, #{chatType}, #{chatId}, #{createDate}, #{stickSign}, #{sortIndex}, #{lastChatDate})
+	</insert>
+	<!-- 查询普通类型的聊天 -->
+	<select id="qryByUserId" parameterType="java.lang.String" resultMap="resultMap">
+		SELECT USER_ID, CHAT_TYPE, CHAT_ID, CREATE_DATE, STICK_SIGN, SORT_INDEX, LAST_CHAT_DATE
+		FROM CHAT_ROOM WHERE USER_ID=#{USER_ID}
+    </select>
+	
+    <select id="qryByUserIdAndChatId" resultMap="resultMap">
+    	SELECT USER_ID, CHAT_TYPE, CHAT_ID, CREATE_DATE, STICK_SIGN, SORT_INDEX, LAST_CHAT_DATE FROM CHAT_ROOM WHERE USER_ID=#{USER_ID} AND CHAT_TYPE=#{CHAT_TYPE} AND CHAT_ID=#{CHAT_ID}
+    </select>
+    <select id="qryMaxSortIndex" resultType="java.lang.Integer">
+        SELECT MAX(SORT_INDEX) FROM CHAT_ROOM WHERE USER_ID=#{USER_ID}
+    </select>
+    <update id="updateStickSign">
+        UPDATE CHAT_ROOM SET 
+            STICK_SIGN = #{STICK_SIGN},
+            SORT_INDEX = #{SORT_INDEX}
+        WHERE USER_ID=#{USER_ID} AND CHAT_TYPE=#{CHAT_TYPE} AND CHAT_ID=#{CHAT_ID}
+    </update>
+    <delete id="delete">
+        DELETE FROM CHAT_ROOM WHERE USER_ID=#{USER_ID} AND CHAT_TYPE=#{CHAT_TYPE} AND CHAT_ID=#{CHAT_ID}
+    </delete>
+	<update id="updateChatDate">
+        UPDATE CHAT_ROOM SET 
+        LAST_CHAT_DATE=#{LAST_CHAT_DATE}
+        WHERE USER_ID=#{USER_ID} AND CHAT_TYPE=#{CHAT_TYPE} AND CHAT_ID=#{CHAT_ID}
+    </update>
+</mapper>

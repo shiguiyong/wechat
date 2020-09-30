@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ChatMessageMapper">
+ 
+	<resultMap type="com.model.ChatMessage" id="resultMap">
+		<id column="MESSAGE_ID" property="messageId"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="CHAT_TYPE" property="chatType"/>
+		<result column="CHAT_ID" property="chatId"/>
+		<result column="SEND_ID" property="sendId"/>
+		<result column="CHAT_DATE" property="chatDate"/>
+		<result column="CONTENT_TYPE" property="contentType"/>
+		<result column="CHAT_CONTENT" property="chatContent"/>
+	</resultMap>
+	
+	<parameterMap type="com.model.ChatMessage" id="parameterMap">
+		<parameter property="messageId" resultMap="resultMap" />
+		<parameter property="userId" resultMap="resultMap" />
+		<parameter property="chatType" resultMap="resultMap" />
+		<parameter property="chatId" resultMap="resultMap" />
+		<parameter property="sendId" resultMap="resultMap" />
+		<parameter property="chatDate" resultMap="resultMap" />
+		<parameter property="contentType" resultMap="resultMap" />
+		<parameter property="chatContent" resultMap="resultMap" />
+	</parameterMap>
+	
+	<insert id="insert" parameterMap="parameterMap">
+		INSERT INTO CHAT_MESSAGE
+			(MESSAGE_ID, USER_ID, CHAT_TYPE, CHAT_ID, SEND_ID, CHAT_DATE, CONTENT_TYPE, CHAT_CONTENT) 
+		VALUES 
+			(#{messageId}, #{userId}, #{chatType}, #{chatId}, #{sendId}, #{chatDate}, #{contentType}, #{chatContent})
+	</insert>
+</mapper>

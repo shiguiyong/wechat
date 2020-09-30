@@ -1,0 +1,49 @@
+server:
+  port: 82 # https 端口    netstat -ano|findstr "443" 检测端口是否被占用
+  undertow:
+    io-threads: 4
+    worker-threads: 32
+    buffer-size: 1024
+    direct-buffers: true
+  http2:
+    enabled: true
+
+spring:
+  http:
+    encoding:
+       force:  true
+       charset: UTF-8
+       enabled: true
+  servlet:
+    multipart:
+      enabled: true
+      maxFileSize: 100MB
+      maxRequestSize: 120MB
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: wzy
+    password: Wzy19951126
+    url: jdbc:mysql://rm-bp19w12kdo349h131qo.mysql.rds.aliyuncs.com:3306/imchat?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initial-size: 5
+      min-idle: 5
+      maxActive: 500
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 30000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+  mvc:
+    favicon:
+      enabled: false
+      
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+
+logging:
+  config: classpath:logback-spring.xml

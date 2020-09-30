@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ApplyInfoMapper">
+ 
+	<resultMap type="com.model.ApplyInfo" id="resultMap">
+		<id column="APPLY_ID" property="applyId"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="APPLY_USER_ID" property="applyUserId"/>
+		<result column="APPLY_TYPE" property="applyType"/>
+		<result column="APPLY_CONTENT" property="applyContent"/>
+		<result column="APPLY_DATE" property="applyDate"/>
+		<result column="APPLY_STATE" property="applyState"/>
+	</resultMap>
+	
+	<parameterMap type="com.model.ApplyInfo" id="parameterMap">
+		<parameter property="applyId" resultMap="resultMap" />
+		<parameter property="userId" resultMap="resultMap" />
+		<parameter property="applyUserId" resultMap="resultMap" />
+		<parameter property="applyType" resultMap="resultMap" />
+		<parameter property="applyContent" resultMap="resultMap" />
+		<parameter property="applyDate" resultMap="resultMap" />
+		<parameter property="applyState" resultMap="resultMap" />
+	</parameterMap>
+
+	<select id="qryByUserId" parameterType="java.lang.String" resultMap="resultMap">
+		SELECT
+			APPLY_ID, USER_ID, APPLY_USER_ID, APPLY_TYPE, APPLY_CONTENT, APPLY_DATE, APPLY_STATE
+		FROM
+			APPLY_INFO 
+		WHERE USER_ID=#{USER_ID} and APPLY_DATE>date_sub(curdate(),interval 3 day) ORDER BY APPLY_DATE
+    </select>
+	
+	<insert id="insert" parameterMap="parameterMap" keyProperty="applyId" useGeneratedKeys="true">
+		INSERT INTO APPLY_INFO 
+			(USER_ID, APPLY_USER_ID, APPLY_TYPE, APPLY_CONTENT, APPLY_DATE, APPLY_STATE)
+		VALUES 
+			(#{userId},#{applyUserId},#{applyType},#{applyContent},#{applyDate},#{applyState})
+	</insert>
+	
+	<select id="qryByApplyId" parameterType="java.lang.Integer" resultMap="resultMap">
+		SELECT
+			APPLY_ID, USER_ID, APPLY_USER_ID, APPLY_TYPE, APPLY_CONTENT, APPLY_DATE, APPLY_STATE
+		FROM
+			APPLY_INFO 
+		WHERE APPLY_ID=#{APPLY_ID}
+	</select>
+	
+	<update id="update" parameterMap="parameterMap">
+		update APPLY_INFO SET APPLY_STATE = #{applyState} WHERE APPLY_ID = #{applyId}
+	</update>
+	
+</mapper>

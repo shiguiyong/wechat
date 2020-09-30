@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ServerConfigMapper">
+
+    <resultMap type="com.model.ServerConfig" id="resultMap">
+        <id column="CONFIG_KEY" property="configKey"/>
+        <result column="CONFIG_VALUE" property="configValue"/>
+    </resultMap>
+
+    <parameterMap type="com.model.ServerConfig" id="parameterMap">
+        <parameter property="configKey" resultMap="resultMap" />
+        <parameter property="configValue" resultMap="resultMap" />
+    </parameterMap>
+    
+    <update id="update" parameterMap="parameterMap">
+        UPDATE SERVER_CONFIG SET CONFIG_VALUE=#{configValue} WHERE CONFIG_KEY=#{configKey}
+    </update>
+    
+    <select id="qryList" resultMap="resultMap">
+        SELECT CONFIG_KEY,CONFIG_VALUE FROM SERVER_CONFIG
+    </select>
+
+</mapper>

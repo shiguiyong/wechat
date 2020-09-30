@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.FriendMapper">
+ 
+	<resultMap type="com.model.Friend" id="resultMap">
+		<result column="USER_ID" property="userId"/>
+		<result column="FRIEND_ID" property="friendId"/>
+		<result column="REMARK_NAME" property="remarkName"/>
+		<result column="CREATE_DATE" property="createDate"/>
+	</resultMap>
+	
+	<parameterMap type="com.model.Friend" id="parameterMap">
+		<parameter property="userId" resultMap="resultMap" />
+		<parameter property="friendId" resultMap="resultMap" />
+		<parameter property="remarkName" resultMap="resultMap" />
+		<parameter property="createDate" resultMap="resultMap" />
+	</parameterMap>
+
+	<select id="qryByUserId" parameterType="java.lang.String" resultMap="resultMap">
+    	SELECT USER_ID, FRIEND_ID, REMARK_NAME, CREATE_DATE FROM FRIEND WHERE USER_ID=#{USER_ID} 
+    </select>
+	
+	<insert id="insert" parameterMap="parameterMap">
+		INSERT INTO friend
+			(USER_ID, FRIEND_ID, REMARK_NAME, CREATE_DATE) 
+			VALUES 
+			(#{userId}, #{friendId}, #{remarkName}, #{createDate})
+	</insert>
+	
+	<select id="isFriend" resultType="java.lang.Boolean">
+		SELECT COUNT(1) FROM FRIEND WHERE USER_ID=#{USER_ID} and FRIEND_ID=#{FRIEND_ID}
+	</select>
+
+	<select id="qryRemarkByUserId" parameterType="java.lang.String" resultMap="resultMap">
+		SELECT USER_ID, FRIEND_ID, REMARK_NAME, CREATE_DATE
+		FROM FRIEND WHERE USER_ID=#{USER_ID} AND REMARK_NAME IS NOT NULL
+    </select>
+	
+	<update id="update" parameterMap="parameterMap">
+		UPDATE FRIEND SET REMARK_NAME = #{remarkName} WHERE USER_ID=#{userId} AND FRIEND_ID=#{friendId}
+	</update>
+	
+	<select id="qryByUserIdAndFriendId" resultMap="resultMap">
+		SELECT USER_ID, FRIEND_ID, REMARK_NAME, CREATE_DATE
+		FROM FRIEND WHERE USER_ID=#{USER_ID} AND FRIEND_ID=#{FRIEND_ID}
+	</select>
+    
+    <delete id="delete">
+        DELETE FROM FRIEND WHERE USER_ID=#{USER_ID} AND FRIEND_ID=#{FRIEND_ID}
+    </delete>
+</mapper>

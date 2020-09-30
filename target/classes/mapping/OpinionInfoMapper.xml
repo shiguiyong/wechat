@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.OpinionInfoMapper">
+
+    <resultMap type="com.model.OpinionInfo" id="resultMap">
+        <id column="OPINION_ID" property="opinionId"/>
+        <result column="OPINION_CONTENT" property="opinionContent"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="OPINION_STATE" property="opinionState"/>
+        <result column="UPDATE_DATE" property="updateDate"/>
+    </resultMap>
+
+    <parameterMap type="com.model.OpinionInfo" id="parameterMap">
+        <parameter property="opinionId" resultMap="resultMap" />
+        <parameter property="opinionContent" resultMap="resultMap" />
+        <parameter property="createDate" resultMap="resultMap" />
+        <parameter property="opinionState" resultMap="resultMap" />
+        <parameter property="updateDate" resultMap="resultMap" />
+    </parameterMap>
+
+    <insert id="insert" parameterMap="parameterMap" keyProperty="opinionId" useGeneratedKeys="true">
+		INSERT INTO OPINION_INFO
+			(OPINION_CONTENT, CREATE_DATE, OPINION_STATE, UPDATE_DATE)
+		VALUES
+			(#{opinionContent},#{createDate},#{opinionState},#{updateDate})
+	</insert>
+
+</mapper>

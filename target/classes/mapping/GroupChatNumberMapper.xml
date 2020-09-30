@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.GroupChatNumberMapper">
+ 
+	<resultMap type="com.model.GroupChatNumber" id="resultMap">
+		<id column="GROUP_ID" property="groupId"/>
+		<result column="NUMBER_ID" property="numberId"/>
+		<result column="GROUP_NICK_NAME" property="groupNickName"/>
+		<result column="JOIN_DATE" property="joinDate"/>
+	</resultMap>
+	
+	<parameterMap type="com.model.GroupChatNumber" id="parameterMap">
+		<parameter property="groupId" resultMap="resultMap" />
+		<parameter property="numberId" resultMap="resultMap" />
+		<parameter property="groupNickName" resultMap="resultMap" />
+		<parameter property="joinDate" resultMap="resultMap" />
+	</parameterMap>
+
+	<insert id="insert" parameterMap="parameterMap">
+		INSERT INTO GROUP_CHAT_NUMBER
+			(GROUP_ID, NUMBER_ID, GROUP_NICK_NAME, JOIN_DATE)
+			values
+			(#{groupId},#{numberId},#{groupNickName},#{joinDate})
+	</insert>
+
+	<insert id="insertBatch">
+		INSERT INTO GROUP_CHAT_NUMBER
+		(GROUP_ID, NUMBER_ID, GROUP_NICK_NAME, JOIN_DATE)
+		values
+		<foreach collection="list" item="number" separator=",">
+			(#{number.groupId},#{number.numberId},#{number.groupNickName},#{number.joinDate})
+		</foreach>
+	</insert>
+
+	<select id="qryByGroupId" parameterType="java.lang.String" resultMap="resultMap">
+		SELECT GROUP_ID, NUMBER_ID, GROUP_NICK_NAME, JOIN_DATE FROM GROUP_CHAT_NUMBER WHERE GROUP_ID=#{GROUP_ID}
+    </select>
+    
+    <select id="qryHeadImgByGroupId" parameterType="java.lang.String" resultType="java.util.Map">
+    	SELECT N.NUMBER_ID,U.USER_IMG 
+    	FROM GROUP_CHAT_NUMBER N,USER U 
+    	WHERE N.GROUP_ID=#{GROUP_ID} AND N.NUMBER_ID=U.USER_ID AND U.USER_IMG IS NOT NULL LIMIT 9
+    </select>
+    
+    <delete id="deleteNumber">
+        DELETE  FROM  GROUP_CHAT_NUMBER WHERE GROUP_ID=#{GROUP_ID} AND NUMBER_ID=#{NUMBER_ID}
+    </delete>
+</mapper>

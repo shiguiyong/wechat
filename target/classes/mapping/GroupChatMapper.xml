@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.GroupChatMapper">
+ 
+	<resultMap type="com.model.GroupChat" id="resultMap">
+		<id column="GROUP_ID" property="groupId"/>
+		<result column="GROUP_NAME" property="groupName"/>
+		<result column="GROUP_IMG" property="groupImg"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="CREATE_DATE" property="createDate"/>
+	</resultMap>
+	
+	<parameterMap type="com.model.GroupChat" id="parameterMap">
+		<parameter property="groupId" resultMap="resultMap" />
+		<parameter property="groupName" resultMap="resultMap" />
+		<parameter property="groupImg" resultMap="resultMap" />
+		<parameter property="userId" resultMap="resultMap" />
+		<parameter property="createDate" resultMap="resultMap" />
+	</parameterMap>
+	
+	<insert id="insert" parameterMap="parameterMap">
+		INSERT INTO GROUP_CHAT
+			(GROUP_ID, GROUP_NAME, GROUP_IMG, USER_ID, CREATE_DATE)
+			VALUES
+			(#{groupId},#{groupName},#{groupImg},#{userId},#{createDate})
+	</insert>
+
+	<select id="qryByUserId" parameterType="java.lang.String" resultMap="resultMap">
+		SELECT GROUP_ID, GROUP_NAME, USER_ID, CREATE_DATE FROM GROUP_CHAT WHERE GROUP_ID IN (
+			SELECT GROUP_ID FROM GROUP_CHAT_NUMBER WHERE NUMBER_ID=#{USER_ID})
+    </select>
+    
+    <select id="qryByGroupId" parameterType="java.lang.String" resultMap="resultMap">
+    	SELECT GROUP_ID, GROUP_NAME, GROUP_IMG, USER_ID, CREATE_DATE FROM GROUP_CHAT WHERE GROUP_ID=#{GROUP_ID}
+    </select>
+    
+	<select id="size" resultType="java.lang.Integer">
+		SELECT COUNT(GROUP_ID) FROM GROUP_CHAT
+	</select>
+	
+	<select id="page" parameterType="java.util.Map" resultMap="resultMap">
+		SELECT GROUP_ID, GROUP_NAME, GROUP_IMG, USER_ID, CREATE_DATE FROM GROUP_CHAT LIMIT #{OFFSET},#{LIMIT}
+	</select>
+
+	<select id="exist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+		SELECT COUNT(GROUP_ID) FROM GROUP_CHAT WHERE GROUP_ID=#{GROUP_ID}
+	</select>
+	<update id="modifyGroupName">
+        UPDATE GROUP_CHAT SET GROUP_NAME=#{GROUP_NAME} WHERE GROUP_ID=#{GROUP_ID}
+    </update>
+</mapper>

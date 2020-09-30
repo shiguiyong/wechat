@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UnreadMessageMapper">
+
+    <resultMap type="com.model.UnreadMessage" id="resultMap">
+        <id column="MESSAGE_ID" property="messageId"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="MESSAGE_DATE" property="messageDate"/>
+        <result column="MESSAGE_CONTENT" property="messageContent"/>
+    </resultMap>
+
+    <parameterMap type="com.model.UnreadMessage" id="parameterMap">
+        <parameter property="messageId" resultMap="resultMap" />
+        <parameter property="userId" resultMap="resultMap" />
+        <parameter property="messageDate" resultMap="resultMap" />
+        <parameter property="messageContent" resultMap="resultMap" />
+    </parameterMap>
+
+    <insert id="insert" parameterMap="parameterMap">
+		INSERT INTO UNREAD_MESSAGE
+		    (MESSAGE_ID, USER_ID, MESSAGE_DATE, MESSAGE_CONTENT)
+		VALUES
+		    (#{messageId}, #{userId}, #{messageDate}, #{messageContent} )
+	</insert>
+    <delete id="timeOut" parameterType="java.lang.String">
+        DELETE FROM UNREAD_MESSAGE WHERE 
+        <![CDATA[ MESSAGE_DATE <= #{MESSAGE_DATE} ]]>
+    </delete>
+    <select id="qryList" resultMap="resultMap">
+        SELECT MESSAGE_ID, USER_ID, MESSAGE_DATE, MESSAGE_CONTENT FROM UNREAD_MESSAGE WHERE USER_ID=#{USER_ID} AND <![CDATA[ MESSAGE_DATE <= #{MESSAGE_DATE} ]]>
+    </select>
+    <delete id="delById" parameterType="java.lang.String">
+        DELETE FROM UNREAD_MESSAGE WHERE MESSAGE_ID=#{MESSAGE_ID}
+    </delete>
+</mapper>

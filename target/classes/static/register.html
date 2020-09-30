@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content="IM即时通讯"/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="yunbamboo, 1115370641@qq.com"/>
+    <meta name="keywords" content="IMChat,即时通讯,IMChat即时通讯">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Mon, Nov 25 2019 00:00:00 GMT">
+    <meta http-equiv="expires" content="-1">
+	<title>IMChat注册</title>
+	
+	<script type="text/javascript" src="js/jquery-1.7.2/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/register.css" />
+	<link rel="icon" href="image/logo.png" type="image/x-icon" id="page_favionc">
+</head>
+<body>
+	<a class="logo" href="javascript:void(0)" data-bind="click: home">IMChat</a>
+	
+	<div id="side" class="side"></div>
+	<div class="main-wraper">
+		<div id="registerBox" class="register-box">
+			<div class="welcome">欢迎注册IMChat</div>
+			<div class="header">每一天，乐在沟通。</div>
+			<div id="usernameinput" class="input-area">
+				<div class="input-flags">
+					<div class="input-ok" style="display: none;"></div>
+				</div>
+				<div class="input-outer">
+					<input autocomplete="off" type="text" id="username" class="username" maxlength="24" placeholder="昵称">
+				</div>
+				<div class="error-tips-wrap slideup">
+					<div class="error-tips" style="display: none;">昵称不可以为空</div>
+				</div>
+			</div>
+			<div id="userpwdinput" class="input-area">
+				<div class="input-flags">
+					<div class="input-ok" style="display: none;"></div>
+					<div class="eye close" title="长按显示密码"></div>
+				</div>
+				<div class="input-outer">
+					<div class="password-raw" style="display: none;"></div>
+					<input autocomplete="off" type="password" id="userpwd" class="userpwd" maxlength="16" placeholder="密码">
+				</div>
+				<div class="password-tips-group" style="display: none;">
+					<div class="password-tips">不能包括空格</div>
+					<div class="password-tips">长度为8-16个字符</div>
+					<div class="password-tips">必须包含字母、数字、符号中至少2种</div>
+				</div>
+				<div class="error-tips-wrap">
+					<div class="error-tips" style="display: none;">密码不能为空</div>
+				</div>
+			</div>
+			<div>
+				<input id="get_acc" type="submit" class="submit" value="立即注册" tabindex="8">
+			</div>
+		</div>
+		
+		<div id="mainBox" class="main" style="display: none;">
+			<div class="succ">
+				<div class="succ-logo"></div>
+				<div class="reg-succ">注册成功</div>
+				<div>
+					<div class="imchat-number">
+						<label id="imchatNumber">194651</label>
+						<img id="filewriter" title="保存到文件" src="image/filewriter.png" style="width: 24px;height: 30px;margin-top: 3px;margin-left: 2px;cursor: pointer;">
+					</div>
+					<div class="phone-tips"></div>
+					<div class="warning">三天内未登录，该号码将会被收回。</div>
+					
+					<button id="loginbtn" class="login">立即登录</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/register.js"></script>
+</body>
+</html>

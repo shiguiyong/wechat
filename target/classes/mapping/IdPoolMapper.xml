@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.IdPoolMapper">
+	<!-- 查询普通类型的聊天 -->
+	<select id="random" parameterType="java.lang.Integer" resultType="java.lang.String">
+		SELECT
+    		T1.ID
+		FROM
+		    ID_POOL AS T1
+		JOIN (
+		    SELECT
+		        ROUND(
+		            RAND() * (
+		                (SELECT MAX(ID) FROM ID_POOL) - (SELECT MIN(ID) FROM ID_POOL)
+		            ) + (SELECT MIN(ID) FROM ID_POOL)
+		        ) AS ID
+		) AS T2
+		WHERE
+		    T1.ID >= T2.ID AND T1.STATE=0
+		LIMIT #{SIZE}
+    </select>
+    <update id="update" parameterType="java.lang.String">
+    	UPDATE ID_POOL SET STATE = 1 WHERE ID=#{ID}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.String">
+    	DELETE FROM ID_POOL WHERE STATE = 1
+    </delete>
+    
+    <select id="count" resultType="java.lang.Integer">
+    	SELECT COUNT(ID) FROM ID_POOL WHERE STATE = 0
+    </select>
+    
+    <select id="exist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+    	SELECT COUNT(ID) FROM ID_POOL WHERE ID = #{ID}
+    </select>
+    
+    <insert id="insertBatch">
+    	INSERT INTO ID_POOL
+			(ID,STATE)
+    	VALUES
+    	<foreach collection ="list" item="id" separator =",">
+         	(#{id}, 0)
+    	</foreach >
+    </insert>
+</mapper>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content="IM即时通讯"/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="yunbamboo, 1115370641@qq.com"/>
+    <meta name="keywords" content="IMChat,即时通讯,IMChat即时通讯">
+	<meta name="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Mon, Nov 25 2019 00:00:00 GMT">
+    <meta http-equiv="expires" content="-1">
+	<title>IMChat 网页版</title>
+	<link rel="stylesheet" type="text/css" href="css/chat.css" />
+	<script type="text/javascript" src="js/jquery-1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.7.2/jquery.nicescroll.js"></script>
+	<script type="text/javascript" src="js/IMChat.js"></script>
+	<script type="text/javascript" src="js/IMChatEditor.js"></script>
+	<link rel="icon" href="image/logo.png" type="image/x-icon" id="page_favionc">
+</head>
+<body>
+	<div id="login" class="login">
+		<div class="logo">
+			<img src="image/logo.png" style="height: 60px;width: 60px;">
+		</div>
+		<div class="login-box">
+			<div id="pwdLoginTab" >
+				<h2 class="loginbox-title">帐号登录</h2>
+				<div style="position: relative;text-align: center;">
+					<div style="padding: 0;height: 32px;margin: 0;"></div>
+					<div style="padding: 0 30px;width: 340px;">
+						<!-- 用户名 -->
+						<div class="inputbox">
+							<div style="float: left;width: 21px;text-align: center;padding: 0 5px 0 10px;height: 100%;">
+								<div class="user-img1" style="display: inline-block;width: 22px;height: 24px;margin-top: 12px;"></div>
+							</div>
+							<div style="height: 100%;position: relative;float: left;height: 100%;">
+								<input id="userId" type="text" autocomplete="off" style="height: 46px;line-height: 46px;padding-left: 8px;color: #333;border: 0;font-size: 16px;font-weight: bold;width: 293px;background-color: #fff" placeholder="请输入账号"/>
+							</div>
+						</div>
+						<div style="padding: 0;height: 32px;margin: 0;"></div>
+						<!-- 密码 -->
+						<div class="inputbox">
+							<div style="float: left;width: 21px;text-align: center;padding: 0 5px 0 10px;height: 100%;">
+								<div class="user-img2" style="display: inline-block;width: 22px;height: 24px;margin-top: 12px;"></div>
+							</div>
+							<div style="height: 100%;position: relative;float: left;height: 100%;">
+								<input id="userPwd" type="password" autocomplete="new-password" style="height: 46px;line-height: 46px;padding-left: 8px;color: #333;border: 0;font-size: 16px;font-weight: bold;width: 293px;background-color: #fff" placeholder="请输入密码"/>
+							</div>
+						</div>
+						<div style="padding: 0;height: 12px;margin: 0;"></div>
+						<div style="padding: 0;height: 32px;margin: 0;">
+							<span style="float: right;color: #1760D7;font-size: 14px;height: 12px;cursor: pointer;line-height: 16px;display: none;">忘记密码?</span>
+						</div>
+						<div style="padding: 0;height: 12px;margin: 0;"></div>
+						<div style="padding: 0;height: 32px;margin: 0;">
+							<button id="loginButton" style="width: 100%;padding: 15px;">登&nbsp;&nbsp;录</button>
+						</div>
+						<div style="padding: 0;height: 40px;margin: 0;"></div>
+						<div style="padding: 0;height: 32px;margin: 0;">
+							<span id="pwdRegisterButton" style="color: #1760D7;font-size: 16px;height: 16px;cursor: pointer;line-height: 16px;">注册新账号</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="bottom: 60px;position: absolute;left: 60px;font-size: 12px;color: #d3d3d3;">
+			<span style="margin-right: 10px;cursor: pointer;">IMChat PC版下载</span>|<span style="margin-left: 10px;cursor: pointer;">IMChat APP下载</span>
+		</div>
+	</div>
+	<div id="main" style="width: 100%;height: 100%;overflow: auto;display: none;">
+		<div class="main" style="text-align: center;">
+			<div id="panel" class="panel">
+				<!-- 操作面板 -->
+				<div id="optionPanel" class="optionPanel">
+					<!-- 头像 -->
+					<div style="width: 100%;height: 80px;">
+						<img id="headButton" class="headButton" src="image/logo.png">
+					</div>
+					<!-- 最近聊天按钮 -->
+					<div style="width: 100%;height: 50px;">
+						<div id="chatRoomButton" class="chatRoomButtonActive" title="聊天" selected="selected"></div>
+					</div>
+					<!-- 通讯录列表按钮 -->
+					<div style="width: 100%;height: 50px;">
+						<div id="friendButton" class="friendButtonNormal" title="通讯录" ></div>
+					</div>
+					<!-- 添加好友按钮 -->
+					<div style="position:absolute;bottom:0px;bottom:80px;width: 80px;height: 50px;">
+						<div id="searchFriendButton" class="searchFriendButton" title="添加好友"></div>
+					</div>
+					<!-- 列表按钮 -->
+					<div style="position:absolute;bottom:0px;bottom:0px;width: 80px;height: 80px;">
+						<div id="listButton" class="listButton" title="更多"></div>
+					</div>
+				</div>
+				<!-- 列表展示面板 -->
+				<div id="listPanel" class="listPanel">
+					<!-- 检索头的搜索框 -->
+					<div id="searchListPanel" class="searchListPanel">
+						<div class="searchInput">
+							<div style="float: left;width: 20px;text-align: center;padding: 0 5px 0 10px;height: 100%;">
+								<div class="search" style="display: inline-block;width: 22px;height: 24px;margin-top: 10px;"></div>
+							</div>
+							<div style="height: 100%;position: relative;float: left;height: 100%;">
+								<input type="text" placeholder="搜索"/>
+							</div>
+						</div>
+						<div id="searchButton" class="addButtonDiv">
+							<div class="addButton"></div>
+						</div>
+					</div>
+					<!-- 列表展示面板-->
+					<div id="listViewPanel" class="listViewPanel">
+						<!-- 聊天列表 -->
+						<div id="chatRoomListPanel" class="chatRoomListPanel">
+						</div>
+						<!-- 通讯录 addressListPanel-->
+						<div id="addressListPanel" class="addressListPanel" style="display: none">
+						</div>
+						<!-- 检索结果 -->
+						<div id="searchResultListPanel" class="searchResultListPanel" style="display: none">
+						</div>
+					</div>
+				</div>
+				<div id="emptyPanel" class="emptyPanel">
+				</div>
+				<!-- 聊天展示面板 -->
+				<div id="chatPanel" class="chatPanel" style="display: none;">
+					<!-- 聊天标题 -->
+					<div style="width: 100%;height: 79px;text-align: left;border-bottom: 1px solid #e6e6e6;">
+						<span id="chatTitle" style="position: relative;top: 20px;height: 40px;line-height: 40px;font-size: 24px;left: 20px;font-weight: 500;"></span>
+					</div>
+					<!-- 聊天内容 -->
+					<div id="chatContentPanel">
+						<div id="chatContent">
+						</div>
+					</div>
+					<!-- 聊天内容编辑 -->
+					<div id="chatMessageEditorDetails" style="width: 100%;height: 239px;border-top: 1px solid #e6e6e6;background-color:#fff;">
+						<div id="chatMessageEditorMenu" style="width: 100%;height: 35px;line-height: 35px;">
+						</div>
+						<div id="chatMessageEditorPanel" style="width: 100%;height: 150px;text-align: left;" >
+						</div>
+						<div style="width: 100%;height: 54px;">
+							<button id="sendButton" style="float: right;margin-right: 60px;background-color: #E8E8E8;color: #363636;font-size: 14px;">发送(S)</button>
+							<span style="float: right;margin-right: 10px;font-size: 12px;padding: 8px 10px;color: #696969;">按下Ctrl+Enter换行</span>
+						</div>
+					</div>
+				</div>
+				<!-- 通讯录详细展示 -->
+				<div id="addressDetailsPanel" class="addressDetailsPanel" style="display: none;">
+					<!-- 通讯录标题 -->
+					<div id="addressDetailsTitlePanel" style="width: 100%;height: 79px;text-align: left;">
+						<span id="addressDetailsTitle" style="position: relative;top: 20px;height: 40px;line-height: 40px;font-size: 24px;left: 20px;font-weight: 500;"></span>
+					</div>
+					<!-- 详细展示 -->
+					<div id="addressDetailsContentPanel"></div>
+				</div>
+				<!--验证消息列表-->
+				<div id="applyInfoListPanel" class="applyInfoListPanel" style="display: none;">
+					<div style="width: 100%;height: 79px;text-align: left;border-bottom: 1px solid #e6e6e6;">
+						<span style="position: relative;top: 20px;height: 40px;line-height: 40px;font-size: 24px;left: 20px;font-weight: 500;">验证消息</span>
+					</div>
+					<!-- 验证消息列表 -->
+					<div id="applyInfoListContentPanel"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="maskLayer" class="maskLayer" style="display: none;"></div>
+	<iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+    <div id="alertPanel" class="alertPanel" style="display: none"></div>
+	<script type="text/javascript">
+		IMChat.load();
+	</script>
+	<script type="text/javascript" src="js/IMChatTextMessage.js"></script>
+	<script type="text/javascript" src="js/IMChatImageMessage.js"></script>
+	<script type="text/javascript" src="js/IMChatFileMessage.js"></script>
+	<script type="text/javascript" src="js/IMChatChatRoomListItem.js"></script>
+	<script type="text/javascript" src="js/IMChatAddressListItem.js"></script>
+	<script type="text/javascript" src="js/IMChatGroupChatWin.js"></script>
+	<script type="text/javascript" src="js/IMChatSearchFriendsWin.js"></script>
+	<script type="text/javascript" src="js/IMChatWin.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2/hammer.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2/iscroll-zoom.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2/lrz.all.bundle.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2/jquery.photoClip.js"></script>
+    <script type="text/javascript" src="js/IMChatPhotoClip.js"></script>
+</body>
+</html>

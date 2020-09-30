@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+
+    <property name="logBase" value="./logs/" />
+
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
+    <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"/>
+    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
+    <logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN"/>
+    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
+    <logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="ERROR"/>
+    <logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
+
+    <logger name="com.mapper" level="DEBUG"/>
+    <logger name="com.mapper.UserIdPoolMapper" level="ERROR"/>
+    <logger name="com.mapper.UserMapper.exist" level="ERROR"/>
+    
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80}:%line - %replace(%msg){'^(.{5000}).*$', '$1'} %n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+    <appender name="WebIMChatLog" class="com.common.log.IMChatLogBackAppender" />
+
+    <!--
+    <appender name="WebIMChatFileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80}:%line - %replace(%msg){'^(.{5000}).*$', '$1'} %n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}WebIMChat-%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    -->
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="WebIMChatLog" />
+        <!--
+        <appender-ref ref="WebIMChatFileLog" />
+        -->
+    </root>
+</configuration>
